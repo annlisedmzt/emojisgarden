@@ -1,0 +1,79 @@
+import React, { useEffect, useContext, useState } from 'react';
+import './App.css';
+import Garden from "./component/Garden";
+import { ThemeComponent, themes } from './component/Themes'
+
+
+/* -------------------------------------------------------------------------- */
+/*                            Fonction add gardens                            */
+/* -------------------------------------------------------------------------- */
+
+function App() {
+  const contextType = ThemeContext;
+
+
+  const [gardens, addGarden] = useState([<Garden/>]);
+  const add = () => {
+    const copyGardens = [...gardens];
+    copyGardens.push(<Garden/>)
+    addGarden(copyGardens)
+  }
+
+
+/* -------------------------------------------------------------------------- */
+/*            Return le titre + les deux boutons avec du bootstrap            */
+/* -------------------------------------------------------------------------- */
+
+  const plants = {
+    emoji01: '🌱',
+    emoji02: '🌿',
+    emoji03: '🌳'
+    // background: 'black'
+};
+
+  const [theme, setTheme] = useState(plants);
+  const toggleTheme = () => 
+    theme === themes.plant
+      ? setTheme(themes.dragons)
+      : setTheme(plants);
+
+  return (
+      <ThemeComponent value={plants}>
+        {/* <div className="App">
+            <h1>My Emoji Garden</h1>
+        <form>
+            <label>
+                Select theme : 
+                <select>
+                    <option onClick={toggleTheme} selected value="plants">🌱</option>
+                    <option value="dragons">🐍</option>
+                    <option value="storm">🌧️</option>
+                </select>
+            </label>
+            <label>
+                Select timer : 
+                <input></input>
+            </label>
+        </form>
+
+            <div className="d-flex justify-content-center container">
+              <div className="row justify-content-center">
+                { gardens.map((garden, index) => <div className="col" style={{minWidth: '33%'}}>{garden}</div>)}
+              </div>
+            </div>
+            <div>
+              <button onClick={() => add()} className="btn btn-primary mt-3 mb-5">Add Garden</button>
+
+            </div>
+        </div> */}
+      </ThemeComponent>
+
+  );
+}
+
+
+
+export default App; 
+
+
+
